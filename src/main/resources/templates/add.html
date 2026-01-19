@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Garage Virtuel | Édition</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary-gold: #c5a059;
+            --dark-bg: #0a0a0a;
+            --card-bg: #111111;
+            --text-light: #f4f4f4;
+            --input-bg: #1a1a1a;
+            --border-color: #333;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: rgba(10, 10, 10, 0.95) !important;
+            border-bottom: 1px solid #222;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-gold) !important;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-gold) !important;
+        }
+
+        .btn-gold {
+            background-color: var(--primary-gold);
+            color: black;
+            border-radius: 0;
+            padding: 8px 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        /* Form Card */
+        .form-card {
+            background-color: var(--card-bg);
+            border: 1px solid #222;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-header {
+            background-color: transparent;
+            border-bottom: 1px solid var(--primary-gold);
+        }
+
+        .card-title {
+            color: var(--primary-gold);
+        }
+
+        .form-label {
+            color: #ccc;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-control {
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: white;
+            padding: 12px;
+            border-radius: 0;
+        }
+
+        .form-control:focus {
+            background-color: var(--input-bg);
+            border-color: var(--primary-gold);
+            color: white;
+            box-shadow: none;
+        }
+
+        .form-text {
+            color: #666;
+        }
+
+        .btn-submit {
+            background-color: var(--primary-gold);
+            color: black;
+            border-radius: 0;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            padding: 12px;
+        }
+
+        .btn-submit:hover {
+            background-color: #d4b06a;
+            color: black;
+        }
+
+        .btn-cancel {
+            color: #888;
+        }
+
+        .btn-cancel:hover {
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="pt-5 mt-5">
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">GARAGE VIRTUEL</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+                    <li class="nav-item ps-3">
+                        <a class="btn btn-gold" href="/add">Ajouter Véhicule</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-7">
+                <div class="card form-card">
+                    <div class="card-header py-4 text-center">
+                        <h3 class="card-title mb-0"
+                            th:text="${voiture.id} ? 'CONFIGURATION DU VÉHICULE' : 'NOUVELLE ACQUISITION'">Nouvelle
+                            Acquisition</h3>
+                    </div>
+                    <div class="card-body p-5">
+                        <form th:action="@{/add}" th:object="${voiture}" method="post">
+                            <input type="hidden" th:field="*{id}" />
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label for="marque" class="form-label">Marque</label>
+                                    <input type="text" class="form-control" id="marque" th:field="*{marque}" required
+                                        placeholder="Ex: PORSCHE">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="modele" class="form-label">Modèle</label>
+                                    <input type="text" class="form-control" id="modele" th:field="*{modele}" required
+                                        placeholder="Ex: 911 GT3">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="annee" class="form-label">Année</label>
+                                    <input type="number" class="form-control" id="annee" th:field="*{annee}" required
+                                        min="1900" max="2100">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="couleur" class="form-label">Couleur</label>
+                                    <input type="text" class="form-control" id="couleur" th:field="*{couleur}" required>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="puissance" class="form-label">Puissance (CH)</label>
+                                    <input type="number" class="form-control" id="puissance" th:field="*{puissance}"
+                                        required min="1">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="prixAchat" class="form-label">Valeur (€)</label>
+                                    <input type="number" class="form-control" id="prixAchat" th:field="*{prixAchat}"
+                                        required min="0">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="km" class="form-label">Kilométrage</label>
+                                    <input type="number" class="form-control" id="km" th:field="*{km}" required min="0"
+                                        step="0.1">
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="imageUrl" class="form-label">Photo du Véhicule (URL)</label>
+                                    <input type="url" class="form-control" id="imageUrl" th:field="*{imageUrl}"
+                                        placeholder="https://...">
+                                </div>
+
+                                <div class="col-12 mt-5">
+                                    <button type="submit" class="btn btn-submit w-100 mb-3">Valider la
+                                        configuration</button>
+                                    <div class="text-center">
+                                        <a href="/" class="btn btn-cancel text-decoration-none">Annuler</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Garage Virtuel | Collection Privée</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary-gold: #c5a059;
+            --dark-bg: #0a0a0a;
+            --card-bg: #111111;
+            --text-light: #f4f4f4;
+            --text-muted: #888;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: rgba(10, 10, 10, 0.95) !important;
+            border-bottom: 1px solid #222;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-gold) !important;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-gold) !important;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1503376763036-066120622c74?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--primary-gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Cards */
+        .car-card {
+            background-color: var(--card-bg);
+            border: 1px solid #222;
+            transition: all 0.4s ease;
+            color: var(--text-light);
+        }
+
+        .car-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-gold);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-img-top {
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 1px solid #222;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            color: white;
+            font-size: 1.4rem;
+        }
+
+        .badge-year {
+            background-color: transparent;
+            border: 1px solid var(--primary-gold);
+            color: var(--primary-gold);
+            font-weight: 400;
+            padding: 0.5em 0.8em;
+        }
+
+        .list-group-item {
+            background-color: transparent;
+            border-color: #222;
+            color: #aaa;
+            padding: 0.8rem 0;
+        }
+
+        .spec-value {
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Buttons */
+        .btn-gold {
+            background-color: var(--primary-gold);
+            color: black;
+            border-radius: 0;
+            padding: 10px 25px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .btn-gold:hover {
+            background-color: #d4b06a;
+            color: black;
+            transform: scale(1.05);
+        }
+
+        .btn-outline-gold {
+            border: 1px solid var(--primary-gold);
+            color: var(--primary-gold);
+            border-radius: 0;
+            transition: all 0.3s;
+        }
+
+        .btn-outline-gold:hover {
+            background-color: var(--primary-gold);
+            color: black;
+        }
+
+        .section-title {
+            border-left: 3px solid var(--primary-gold);
+            padding-left: 15px;
+            margin-bottom: 2rem;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">GARAGE VIRTUEL</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="/">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+                    <li class="nav-item ps-3">
+                        <a class="btn btn-gold" href="/add">Ajouter Véhicule</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero-section">
+        <div class="container">
+            <p class="hero-subtitle">Collection Exclusive</p>
+            <h1 class="hero-title">L'Art de l'Automobile</h1>
+        </div>
+    </header>
+
+    <div class="container pb-5">
+        <div class="row mb-5">
+            <div class="col">
+                <h2 class="section-title">NOTRE INVENTAIRE</h2>
+            </div>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
+            <!-- Loop through cars -->
+            <div class="col" th:each="voiture : ${voitures}">
+                <div class="card h-100 car-card">
+                    <!-- Image or Placeholder -->
+                    <img th:if="${voiture.imageUrl != null and !voiture.imageUrl.isEmpty()}"
+                        th:src="${voiture.imageUrl}" class="card-img-top" alt="Voiture">
+                    <div th:unless="${voiture.imageUrl != null and !voiture.imageUrl.isEmpty()}"
+                        class="card-img-top d-flex align-items-center justify-content-center bg-dark">
+                        <i class="bi bi-car-front text-muted" style="font-size: 4rem;"></i>
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title d-flex justify-content-between align-items-center mb-3">
+                            <span th:text="${voiture.marque} + ' ' + ${voiture.modele}">MODELE</span>
+                            <span class="badge badge-year" th:text="${voiture.annee}">2022</span>
+                        </h5>
+
+                        <ul class="list-group list-group-flush mb-4">
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Puissance</span>
+                                <span class="spec-value" th:text="${voiture.puissance} + ' CH'"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Prix</span>
+                                <span class="spec-value"
+                                    th:text="${#numbers.formatDecimal(voiture.prixAchat, 0, 'COMMA', 0, 'POINT')} + ' €'"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Kilométrage</span>
+                                <span class="spec-value" th:text="${voiture.km} + ' km'"></span>
+                            </li>
+                        </ul>
+
+                        <div class="d-flex justify-content-between pt-2">
+                            <a th:href="@{/edit/{id}(id=${voiture.id})}" class="btn btn-outline-gold btn-sm w-50 me-2">
+                                MODIFIER
+                            </a>
+                            <a th:href="@{/delete/{id}(id=${voiture.id})}" class="btn btn-outline-danger btn-sm w-50"
+                                onclick="return confirm('Retirer de la collection ?')">
+                                RETIRER
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty state -->
+            <div class="col-12 text-center py-5" th:if="${#lists.isEmpty(voitures)}">
+                <div class="text-muted mb-3"><i class="bi bi-speedometer2" style="font-size: 3rem; color: #333;"></i>
+                </div>
+                <h3 class="text-light">Collection Vide</h3>
+                <p class="text-muted mb-4">Votre garage attend sa première pièce d'exception.</p>
+                <a href="/add" class="btn btn-gold">Ajouter un véhicule</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
