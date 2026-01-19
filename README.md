@@ -1,7 +1,7 @@
 # GarageVirtuel 🚗
 
 Application Spring Boot de démonstration pour gérer une collection de voitures.
-Portfolio Project - Java Senior.
+Portfolio Project.
 
 ## 🛠 Stack Technique
 
