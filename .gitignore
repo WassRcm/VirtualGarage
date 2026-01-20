@@ -13,3 +13,4 @@ bin/
 *.pyc
 **/.DS_Store
 .vscode/
+DEPLOY.md
