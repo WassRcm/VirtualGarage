@@ -1,7 +1,7 @@
 # GarageVirtuel 🚗
 
 Application Spring Boot de démonstration pour gérer une collection de voitures.
-URL : https://virtualgarage.onrender.com/ (Pas toujours disponible)
+URL : https://virtualgarage.onrender.com/ (Pas toujours up)
 Portfolio Project.
 
 ## 🛠 Stack Technique
